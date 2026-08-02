@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-blanc text-encre font-body antialiased;
+  font-feature-settings: "ss01" on, "cv01" on;
+}
+
+/* Respecte les préférences de mouvement réduit (accessibilité) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Focus visible — accessibilité clavier
+   ------------------------------------------------------------------ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #e8531c;
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------
+   Composants réutilisables
+   ------------------------------------------------------------------ */
+@layer components {
+  /* Eyebrow : petit label au-dessus des titres de section */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-display text-xs font-bold uppercase tracking-widest2 text-orange;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-[2px] w-8 bg-orange;
+  }
+
+  /* Titre de section, échelle typographique cohérente */
+  .h-section {
+    @apply font-display text-4xl font-black leading-[1.05] tracking-tightest sm:text-5xl lg:text-6xl;
+  }
+
+  /* Conteneur de largeur max cohérent sur tout le site */
+  .container-px {
+    @apply mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16;
+  }
+
+  /* Bouton plein — orange, coins nets (identité "chantier / précision") */
+  .btn-solid {
+    @apply inline-flex items-center justify-center gap-2 bg-orange px-8 py-4 font-display text-sm font-bold uppercase tracking-wider text-blanc transition-colors duration-300 hover:bg-orange-light;
+  }
+
+  /* Bouton outline — pour usage sur fond sombre ou clair */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border border-current px-8 py-4 font-display text-sm font-bold uppercase tracking-wider transition-colors duration-300;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Coup de pinceau — élément signature réutilisé (dividers / reveals)
+   ------------------------------------------------------------------ */
+.brush-divider {
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,5 300,35 450,18 C600,2 750,32 900,15 C1000,4 1100,28 1200,20 L1200,40 L0,40 Z" fill="black"/></svg>');
+  mask-size: 100% 100%;
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,5 300,35 450,18 C600,2 750,32 900,15 C1000,4 1100,28 1200,20 L1200,40 L0,40 Z" fill="black"/></svg>');
+  -webkit-mask-size: 100% 100%;
+}
